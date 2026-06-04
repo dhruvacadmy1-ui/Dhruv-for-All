@@ -1,158 +1,299 @@
 ---
 layout: default
-title: Missing Tables Game
+title: Missing Tables Game - Home
+permalink: /
 ---
 
-<h1>🎮 Missing Tables Game</h1>
-<div id="start-screen">
-    <p>Master tables 5 to 16!</p>
-    <button onclick="startGame()">Start Game</button>
+<div class="home-welcome">
+    <div class="hero-section">
+        <h1>🎮 Dhruv for All</h1>
+        <p class="hero-subtitle">Master Multiplication Tables 5-16</p>
+        <p class="hero-description">An interactive educational game designed for students</p>
+    </div>
+    
+    <div class="quick-links">
+        <a href="{{ '/Dhruv-for-All/intro/' | relative_url }}" class="btn btn-primary btn-large">
+            👤 New Player - Start Here
+        </a>
+        <a href="{{ '/Dhruv-for-All/game/' | relative_url }}" class="btn btn-secondary btn-large">
+            🎮 Continue to Game
+        </a>
+    </div>
+    
+    <div class="home-info">
+        <div class="info-card">
+            <h3>🌟 Quick Start</h3>
+            <p>Click "New Player" to introduce yourself and learn about the game before diving in!</p>
+        </div>
+        
+        <div class="info-card">
+            <h3>🏆 Features</h3>
+            <ul>
+                <li>✅ 3 Progressive Difficulty Levels</li>
+                <li>✅ 15 Questions Total</li>
+                <li>✅ Audio Feedback</li>
+                <li>✅ Leaderboard System</li>
+            </ul>
+        </div>
+        
+        <div class="info-card">
+            <h3>📱 Accessibility</h3>
+            <p>Works on desktop, tablet, and mobile devices. Perfect for practicing anytime, anywhere!</p>
+        </div>
+    </div>
+    
+    <div class="stats-section">
+        <h2>📊 Player Statistics</h2>
+        <div id="stats-container" class="stats-display">
+            <div class="stat-item">
+                <span class="stat-label">Total Plays:</span>
+                <span class="stat-value" id="totalPlays">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Current Leader:</span>
+                <span class="stat-value" id="currentLeader">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Best Score:</span>
+                <span class="stat-value" id="bestScore">0/15</span>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="game-ui" style="display:none;">
-    <div id="level" class="level"></div>
-    <div id="question"></div>
-    <input type="number" id="answer" placeholder="?" onkeydown="if(event.key==='Enter') checkAnswer()">
-    <br>
-    <button onclick="checkAnswer()">Submit</button>
-    <div id="feedback" class="feedback-box"></div>
-</div>
+<style>
+    .home-welcome {
+        animation: slideIn 0.6s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .hero-section {
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        color: white;
+        margin-bottom: 40px;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .hero-section h1 {
+        font-size: 56px;
+        margin: 0 0 10px 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .hero-subtitle {
+        font-size: 28px;
+        margin: 10px 0;
+        opacity: 0.95;
+    }
+    
+    .hero-description {
+        font-size: 18px;
+        margin: 10px 0 0 0;
+        opacity: 0.9;
+    }
+    
+    .quick-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 15px 30px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+    
+    .btn-secondary {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .btn-secondary:hover {
+        transform: translateY(-3px);
+        background: #f8f9fa;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    .btn-large {
+        padding: 18px 35px;
+        font-size: 20px;
+    }
+    
+    .home-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+    
+    .info-card {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 15px;
+        border-left: 5px solid #3498db;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+    }
+    
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+    }
+    
+    .info-card h3 {
+        color: #2c3e50;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+    
+    .info-card p {
+        color: #555;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    .info-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .info-card li {
+        color: #555;
+        padding: 8px 0;
+        line-height: 1.6;
+    }
+    
+    .stats-section {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 15px;
+        border-top: 5px solid #3498db;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    
+    .stats-section h2 {
+        color: #2c3e50;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 25px;
+        font-size: 28px;
+    }
+    
+    .stats-display {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    
+    .stat-item {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    
+    .stat-label {
+        display: block;
+        color: #7f8c8d;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .stat-value {
+        display: block;
+        color: #3498db;
+        font-size: 32px;
+        font-weight: bold;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 40px;
+        }
+        
+        .hero-subtitle {
+            font-size: 22px;
+        }
+        
+        .hero-description {
+            font-size: 16px;
+        }
+        
+        .quick-links {
+            grid-template-columns: 1fr;
+        }
+        
+        .home-info {
+            grid-template-columns: 1fr;
+        }
+        
+        .stats-display {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 
 <script>
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-function playSound(type) {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    if (type === 'correct') {
-        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.3);
-    } else if (type === 'wrong') {
-        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.3);
-    } else if (type === 'levelUp') {
-        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.5);
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.5);
+    // Update statistics on page load
+    function updateStats() {
+        const leaderboard = JSON.parse(localStorage.getItem('tableLeaderboard')) || [];
+        
+        // Total plays
+        document.getElementById('totalPlays').textContent = leaderboard.length;
+        
+        // Current leader
+        if (leaderboard.length > 0) {
+            document.getElementById('currentLeader').textContent = leaderboard[0].name;
+        } else {
+            document.getElementById('currentLeader').textContent = '-';
+        }
+        
+        // Best score
+        if (leaderboard.length > 0) {
+            document.getElementById('bestScore').textContent = leaderboard[0].score + '/15';
+        } else {
+            document.getElementById('bestScore').textContent = '0/15';
+        }
     }
-}
-
-const levels = [
-    { name: "🌱 Very Easy Level", questions: [] },
-    { name: "🌿 Medium Level", questions: [] },
-    { name: "🔥 Super Level", questions: [] }
-];
-
-let tables = [5,6,7,8,9,10,11,12,13,14,15,16];
-let currentLevel = 0;
-let currentQuestion = 0;
-let score = 0;
-
-function generateQuestions() {
-    levels.forEach(l => l.questions = []);
     
-    tables.forEach(t => {
-        for (let i=1; i<=12; i++) {
-            let q = { table: t, multiplier: i, answer: t*i };
-            if (i <= 4) levels[0].questions.push(q);
-            else if (i <= 8) levels[1].questions.push(q);
-            else levels[2].questions.push(q);
-        }
-    });
-
-    levels.forEach(level => {
-        level.questions = level.questions.sort(() => 0.5 - Math.random()).slice(0,5);
-    });
-}
-
-function startGame() {
-    document.getElementById("start-screen").style.display = "none";
-    document.getElementById("game-ui").style.display = "block";
-    generateQuestions();
-    loadQuestion();
-}
-
-function loadQuestion() {
-    document.getElementById("level").innerText = levels[currentLevel].name;
-    let q = levels[currentLevel].questions[currentQuestion];
-    document.getElementById("question").innerText = `${q.table} × ${q.multiplier} = ?`;
-    document.getElementById("answer").value = "";
-    document.getElementById("answer").focus();
-    document.getElementById("feedback").innerHTML = "";
-}
-
-function checkAnswer() {
-    let q = levels[currentLevel].questions[currentQuestion];
-    let userAns = document.getElementById("answer").value;
-
-    if (userAns === "") return;
-
-    const feedback = document.getElementById("feedback");
-    if (parseInt(userAns) === q.answer) {
-        score++;
-        playSound('correct');
-        const items = ["🌸", "🍎", "🌻", "🍓", "🍊"];
-        const words = ["Correct", "Good", "Nice"];
-        let randItem = items[Math.floor(Math.random() * items.length)];
-        let randWord = words[Math.floor(Math.random() * words.length)];
-        feedback.innerHTML = `<div class='correct'>${randItem} ${randWord}!</div>`;
-    } else {
-        playSound('wrong');
-        feedback.innerHTML = `<div class='wrong'>❌ Wrong! It was ${q.answer}</div>`;
-    }
-
-    currentQuestion++;
-
-    setTimeout(() => {
-        if (currentQuestion >= 5) {
-            currentLevel++;
-            currentQuestion = 0;
-            if (currentLevel < 3) playSound('levelUp');
-
-            if (currentLevel >= 3) {
-                showScore();
-                return;
-            }
-        }
-        loadQuestion();
-    }, 1500);
-}
-
-function showScore() {
-    let name = prompt("Amazing! Enter your name for the Score Card:", "Player");
-    if (!name) name = "Player";
-
-    let leaderboard = JSON.parse(localStorage.getItem("tableLeaderboard")) || [];
-    leaderboard.push({ name: name, score: score });
-    leaderboard.sort((a, b) => b.score - a.score);
-    leaderboard = leaderboard.slice(0, 5);
-    localStorage.setItem("tableLeaderboard", JSON.stringify(leaderboard));
-
-    let list = leaderboard.map((s) => `<li>${s.name}: ${s.score}/15</li>`).join("");
-
-    document.getElementById("game-container").innerHTML = `
-        <h1>🏆 Final Score Card</h1>
-        <div style="font-size: 24px; margin: 20px 0;">
-            <strong>${name}</strong>, you scored <br>
-            <span style="font-size: 48px; color: #3498db;">${score} / 15</span>
-        </div>
-        <hr>
-        <h3>📊 Top 5 Leaderboard</h3>
-        <ol>${list}</ol>
-        <br><br>
-        <button onclick="location.reload()">🔁 Play Again</button>
-    `;
-}
+    // Update stats when page loads
+    window.addEventListener('DOMContentLoaded', updateStats);
+    
+    // Update stats every 2 seconds to reflect any changes
+    setInterval(updateStats, 2000);
 </script>
