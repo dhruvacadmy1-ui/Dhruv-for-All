@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    {% seo %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            text-align: center; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333; 
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { 
+            max-width: 600px; 
+            margin: 30px auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        h1 { 
+            color: #2c3e50; 
+            margin-bottom: 20px;
+        }
+        
+        .level { 
+            font-size: 28px; 
+            font-weight: bold; 
+            margin: 20px 0; 
+            color: #3498db; 
+        }
+        
+        #question { 
+            font-size: 48px; 
+            margin-bottom: 20px; 
+            font-weight: bold; 
+            color: #2c3e50; 
+        }
+        
+        input { 
+            padding: 15px; 
+            width: 120px; 
+            font-size: 24px; 
+            border: 3px solid #ddd; 
+            border-radius: 10px; 
+            text-align: center; 
+            outline: none; 
+            transition: 0.3s;
+        }
+        
+        input:focus { 
+            border-color: #3498db; 
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        button { 
+            padding: 15px 30px; 
+            margin-top: 20px; 
+            font-size: 18px; 
+            cursor: pointer; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            transition: 0.3s all; 
+            font-weight: bold;
+        }
+        
+        button:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: scale(0.95);
+        }
+        
+        .feedback-box { 
+            height: 60px; 
+            margin-top: 20px; 
+            font-size: 22px; 
+        }
+        
+        .correct { 
+            color: #27ae60; 
+            animation: bounce 0.5s ease; 
+            font-weight: bold;
+        }
+        
+        .wrong { 
+            color: #e74c3c; 
+            font-weight: bold;
+        }
+        
+        @keyframes bounce { 
+            0%, 100% { transform: translateY(0); } 
+            50% { transform: translateY(-10px); } 
+        }
+        
+        ol { 
+            text-align: left; 
+            display: inline-block; 
+            font-size: 18px; 
+            margin: 15px 0;
+        }
+        
+        .footer { 
+            margin-top: 30px; 
+            font-size: 14px; 
+            color: #666; 
+            border-top: 1px solid #ddd; 
+            padding-top: 20px; 
+        }
+        
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .header-info { 
+            font-size: 12px; 
+            color: #999; 
+            margin-bottom: 20px; 
+        }
+        
+        .header-info a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .header-info a:hover {
+            text-decoration: underline;
+        }
+        
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 2px solid #ecf0f1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="game-container">
+    <div class="header-info">
+        <a href="https://github.com/dhruvacadmy1-ui/Dhruv-for-All" target="_blank">📁 View on GitHub</a> | 
+        <a href="https://github.com/dhruvacadmy1-ui" target="_blank">👤 Profile</a>
+    </div>
+    
+    {{ content }}
+    
+    <div class="footer">
+        <p>🚀 Powered by Jekyll Theme - <a href="https://github.com/dhruvacadmy1-ui/Dhruv-for-All" target="_blank">Dhruv for All</a></p>
+        <p style="margin-top: 10px; font-size: 12px;">🎮 Master multiplication tables 5-16 with interactive learning</p>
+    </div>
+</div>
+
+</body>
+</html>
