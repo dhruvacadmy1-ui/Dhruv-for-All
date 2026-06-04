@@ -1,0 +1,20 @@
+title: Dhruv for All - Missing Tables Game
+description: Master multiplication tables 5 to 16 with an interactive game
+url: https://dhruvacadmy1-ui.github.io/Dhruv-for-All/
+baseurl: /Dhruv-for-All
+theme: jekyll-theme-minimal
+show_downloads: false
+github_url: https://github.com/dhruvacadmy1-ui/Dhruv-for-All
+
+# Build settings
+markdown: kramdown
+sass:
+  sass_dir: _sass
+include: [".htaccess"]
+exclude: [".github", ".gitignore", "LICENSE", "README.md"]
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
